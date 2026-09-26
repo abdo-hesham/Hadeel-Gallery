@@ -21,8 +21,8 @@ export default function Footer() {
         </div>
       </div>
       <div className="footer-bottom">
-        <span className="signature">Hadeel</span>
-        <span>© 2026 Hadeel. All works original.</span>
+        <span className="signature">Lilly Boutique</span>
+        <span>© 2026 Lilly Boutique. All works original.</span>
       </div>
     </footer>
   );

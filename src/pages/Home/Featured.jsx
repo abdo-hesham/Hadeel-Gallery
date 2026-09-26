@@ -1,7 +1,7 @@
 import { useLayoutEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { gsap } from '../../lib/gsap.js';
-import { artworks, artUrl } from '../../data/catalog.mjs';
+import { artworks, artUrl, artSrcSet } from '../../data/catalog.mjs';
 
 // One painting owns the viewport. Scrolling zooms into the texture before
 // releasing to the next section.
@@ -30,7 +30,7 @@ export default function Featured() {
       <div className="ft-stage">
         <span className="ft-label eyebrow">01 / Featured work</span>
         <figure className="ft-img" style={{ aspectRatio: `${a.width} / ${a.height}` }}>
-          <img src={artUrl(a.id)} alt={a.title} loading="lazy" />
+          <img src={artUrl(a.id)} srcSet={artSrcSet(a.id)} sizes="(max-width: 900px) 74vw, 46vw" alt={a.title} loading="lazy" decoding="async" />
         </figure>
         <div className="ft-caption">
           <h3 className="display-sm">{a.title}</h3>

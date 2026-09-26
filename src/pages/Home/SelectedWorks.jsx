@@ -1,7 +1,7 @@
 import { useLayoutEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { gsap } from '../../lib/gsap.js';
-import { artworks, artUrl } from '../../data/catalog.mjs';
+import { artworks, artUrl, artSrcSet } from '../../data/catalog.mjs';
 
 // Paintings scattered over a tall canvas; each moves at its own speed on scroll.
 const LAYOUT = [
@@ -61,7 +61,7 @@ export default function SelectedWorks() {
             >
               <span className="sw-index">{String(i + 1).padStart(2, '0')}</span>
               <figure style={{ aspectRatio: `${a.width} / ${a.height}` }}>
-                <img src={artUrl(a.id)} alt={a.title} loading="lazy" />
+                <img src={artUrl(a.id)} srcSet={artSrcSet(a.id)} sizes={`(max-width: 900px) 44vw, ${l.w}vw`} alt={a.title} loading="lazy" decoding="async" />
               </figure>
               <figcaption className="sw-cap">
                 <strong>{a.title}</strong>

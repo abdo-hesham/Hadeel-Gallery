@@ -1,7 +1,7 @@
 import { useLayoutEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { gsap } from '../../lib/gsap.js';
-import { artworks, artUrl, roomUrl, roomRatio, formatPrice } from '../../data/catalog.mjs';
+import { artworks, artUrl, artSrcSet, roomUrl, roomSrcSet, roomRatio, formatPrice } from '../../data/catalog.mjs';
 import { HANDOFF_ID } from './Studio.jsx';
 
 export default function Available() {
@@ -50,7 +50,14 @@ export default function Available() {
             <Link key={a.id} to={`/shop?art=${a.id}`} className={`av-card ${handoff ? 'is-handoff' : ''}`} data-cursor="View">
               <span className="av-num">{String(i + 1).padStart(2, '0')}</span>
               <figure style={{ aspectRatio: handoff ? `${a.width} / ${a.height}` : roomRatio(a) }}>
-                <img src={handoff ? artUrl(a.id) : roomUrl(a)} alt={a.title} loading="lazy" />
+                <img
+                  src={handoff ? artUrl(a.id) : roomUrl(a)}
+                  srcSet={handoff ? artSrcSet(a.id) : roomSrcSet(a)}
+                  sizes="(max-width: 900px) 100vw, 50vw"
+                  alt={a.title}
+                  loading="lazy"
+                  decoding="async"
+                />
               </figure>
               <div className="av-meta">
                 <strong>{a.title}</strong>

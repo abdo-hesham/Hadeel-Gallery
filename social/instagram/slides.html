@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Hadeel — Instagram carousel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter+Tight:wght@300;400;500&display=swap" rel="stylesheet" />
+<style>
+  /* Brand tokens from src/styles/global.css */
+  :root {
+    --ink: #111110; --paper: #f3eee6; --paper-2: #e9e2d7; --mute: #7d776e;
+    --dark: #0d0d0c; --fg: #f0ebe2; --mute-d: #8c877d;
+    --serif: 'Cormorant Garamond', 'Times New Roman', serif;
+    --sans: 'Inter Tight', system-ui, sans-serif;
+    --pad: 84px;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #333; display: flex; flex-direction: column; align-items: center; gap: 40px; padding: 40px 0; font-family: var(--sans); -webkit-font-smoothing: antialiased; }
+  img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  h1, h2, p { margin: 0; font-weight: 300; }
+
+  .slide { position: relative; width: 1080px; height: 1350px; overflow: hidden; background: var(--dark); color: var(--fg); }
+  .slide.paper { background: var(--paper); color: var(--ink); }
+
+  /* shared chrome: wordmark, index, progress */
+  .top { position: absolute; top: 64px; left: var(--pad); right: var(--pad); display: flex; justify-content: space-between; align-items: center; z-index: 10; }
+  .mark { font-family: var(--serif); font-size: 30px; letter-spacing: 0.32em; font-weight: 400; }
+  .idx { font-size: 18px; letter-spacing: 0.18em; color: var(--mute-d); font-variant-numeric: tabular-nums; }
+  .paper .idx { color: var(--mute); }
+  .prog { position: absolute; left: var(--pad); right: var(--pad); bottom: 64px; height: 2px; background: rgba(240,235,226,0.14); z-index: 10; }
+  .paper .prog { background: rgba(17,17,16,0.14); }
+  .prog i { position: absolute; left: 0; top: 0; bottom: 0; background: currentColor; }
+
+  .eyebrow { display: block; font-size: 19px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--mute-d); }
+  .paper .eyebrow { color: var(--mute); }
+  .display { font-family: var(--serif); font-weight: 300; line-height: 0.98; letter-spacing: -0.02em; }
+  .body { font-size: 27px; line-height: 1.5; font-weight: 300; color: var(--mute-d); }
+  .paper .body { color: var(--mute); }
+  .lede { font-family: var(--serif); font-size: 38px; line-height: 1.3; font-weight: 400; }
+
+  /* ---------- 1 cover */
+  .s1 .tile { position: absolute; box-shadow: 0 30px 60px rgba(0,0,0,0.55); }
+  .s1 .tile span { position: absolute; top: -30px; left: 0; font-size: 15px; letter-spacing: 0.18em; color: var(--mute-d); }
+  .s1 .title { position: absolute; left: 0; right: 0; top: 560px; text-align: center; font-size: 238px; letter-spacing: 0.01em; z-index: 5; mix-blend-mode: difference; color: #f0ebe2; }
+  .s1 .sub { position: absolute; left: 0; right: 0; bottom: 170px; text-align: center; z-index: 5; }
+  .s1 .sub .lede { font-style: italic; font-weight: 300; font-size: 46px; margin-top: 18px; }
+  .swipe { position: absolute; right: var(--pad); bottom: 96px; font-size: 18px; letter-spacing: 0.2em; text-transform: uppercase; z-index: 10; display: flex; align-items: center; gap: 14px; }
+  .swipe::after { content: ''; width: 64px; height: 1px; background: currentColor; }
+
+  /* ---------- 2 exists once */
+  .s2 h2 { position: absolute; top: 200px; left: var(--pad); font-size: 118px; }
+  .s2 h2 em { font-style: italic; }
+  .s2 .body { position: absolute; top: 470px; left: var(--pad); width: 640px; }
+  .s2 .row { position: absolute; left: var(--pad); right: var(--pad); bottom: 150px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 28px; align-items: end; }
+  .s2 figure { margin: 0; }
+  .s2 figure .img { aspect-ratio: 4 / 5; overflow: hidden; }
+  .s2 figure:nth-child(2) .img { aspect-ratio: 3 / 4.6; }
+  .s2 figcaption { display: flex; justify-content: space-between; margin-top: 16px; font-size: 19px; }
+  .s2 figcaption b { font-family: var(--serif); font-weight: 400; font-size: 27px; }
+  .s2 figcaption span { color: var(--mute); letter-spacing: 0.08em; align-self: end; }
+
+  /* browser + phone mockups */
+  .browser { position: absolute; border-radius: 14px; overflow: hidden; background: #1b1a18; box-shadow: 0 40px 90px rgba(0,0,0,0.5), 0 0 0 1px rgba(240,235,226,0.12); }
+  .browser .bar { height: 40px; display: flex; align-items: center; gap: 9px; padding: 0 18px; background: #1f1e1c; border-bottom: 1px solid rgba(240,235,226,0.08); }
+  .browser .bar i { width: 11px; height: 11px; border-radius: 50%; background: #3a3834; }
+  .browser .bar u { margin-left: 16px; flex: 1; height: 22px; border-radius: 11px; background: #2a2926; text-decoration: none; font-size: 12px; line-height: 22px; padding-left: 14px; color: #8c877d; letter-spacing: 0.04em; }
+  .browser .shot { aspect-ratio: 1440 / 900; }
+  .paper .browser { box-shadow: 0 40px 90px rgba(40,30,20,0.25), 0 0 0 1px rgba(17,17,16,0.1); }
+  .phone { position: absolute; border-radius: 48px; padding: 12px; background: #1b1a18; box-shadow: 0 40px 90px rgba(0,0,0,0.6), 0 0 0 1px rgba(240,235,226,0.16); }
+  .phone .shot { border-radius: 38px; overflow: hidden; aspect-ratio: 390 / 844; }
+
+  /* ---------- 3 site */
+  .s3 .head { position: absolute; top: 190px; left: var(--pad); right: var(--pad); }
+  .s3 h2 { font-size: 104px; margin-top: 26px; }
+  .s3 .body { margin-top: 30px; width: 700px; }
+  .s3 .browser { left: var(--pad); top: 640px; width: 800px; }
+  .s3 .phone { right: 64px; top: 760px; width: 250px; }
+
+  /* ---------- 4 featured */
+  .s4 .hero { position: absolute; inset: 0 0 440px 0; }
+  .s4 .hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(13,13,12,0.55) 0%, rgba(13,13,12,0) 22%, rgba(13,13,12,0) 70%, var(--dark) 100%); }
+  .s4 .hero img { object-position: center 40%; }
+  .s4 .cap { position: absolute; left: var(--pad); right: var(--pad); bottom: 130px; }
+  .s4 .cap .row { display: flex; justify-content: space-between; align-items: baseline; margin-top: 18px; }
+  .s4 h2 { font-size: 104px; }
+  .s4 .price { font-size: 30px; letter-spacing: 0.04em; font-variant-numeric: tabular-nums; }
+  .s4 .lede { color: var(--fg); opacity: 0.86; margin-top: 22px; font-size: 34px; width: 820px; font-style: italic; font-weight: 300; }
+  .s4 .meta { margin-top: 22px; font-size: 19px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--mute-d); }
+
+  /* ---------- 5 shop */
+  .s5 .head { position: absolute; top: 190px; left: var(--pad); right: var(--pad); }
+  .s5 h2 { font-size: 96px; margin-top: 26px; }
+  .s5 .browser { left: var(--pad); right: var(--pad); top: 470px; }
+  .s5 ul { position: absolute; left: var(--pad); right: var(--pad); bottom: 104px; margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 28px; }
+  .s5 li { border-top: 1px solid rgba(17,17,16,0.2); padding-top: 20px; font-size: 23px; line-height: 1.4; }
+  .s5 li b { display: block; font-family: var(--serif); font-weight: 400; font-size: 32px; margin-bottom: 6px; }
+
+  /* ---------- 6 studio */
+  .s6 .head { position: absolute; top: 190px; left: var(--pad); }
+  .s6 h2 { font-size: 124px; margin-top: 26px; }
+  .s6 .head .body { margin-top: 24px; font-family: var(--serif); font-size: 32px; font-style: italic; }
+  .s6 .grid { position: absolute; left: var(--pad); right: var(--pad); top: 640px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  .s6 .step .img { aspect-ratio: 3 / 4; overflow: hidden; background: #1b1a18; }
+  .s6 .step span { display: block; margin-top: 20px; font-size: 16px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--mute-d); }
+  .s6 .step p { margin-top: 10px; font-family: var(--serif); font-size: 27px; line-height: 1.2; font-weight: 400; }
+
+  /* ---------- 7 statement */
+  .s7 .img { position: absolute; right: 0; top: 0; bottom: 0; width: 470px; }
+  .s7 .img img { object-position: 38% center; }
+  .s7 .text { position: absolute; left: var(--pad); top: 250px; width: 560px; }
+  .s7 blockquote { margin: 34px 0 0; font-size: 100px; }
+  .s7 .body { margin-top: 48px; font-size: 25px; }
+  .s7 .sig { margin-top: 44px; font-family: var(--serif); font-style: italic; font-size: 44px; }
+
+  /* ---------- 8 available */
+  .s8 .head { position: absolute; top: 170px; left: var(--pad); right: var(--pad); display: flex; justify-content: space-between; align-items: end; }
+  .s8 h2 { font-size: 96px; margin-top: 22px; }
+  .s8 .count { text-align: right; font-size: 20px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--mute-d); line-height: 1.7; }
+  .s8 .grid { position: absolute; left: var(--pad); right: var(--pad); top: 440px; display: grid; grid-template-columns: repeat(3, 1fr); column-gap: 26px; row-gap: 34px; }
+  .s8 .img { aspect-ratio: 1 / 1.08; overflow: hidden; }
+  .s8 .cap { display: flex; justify-content: space-between; align-items: baseline; margin-top: 14px; }
+  .s8 .cap b { font-family: var(--serif); font-weight: 400; font-size: 26px; }
+  .s8 .cap span { font-size: 17px; letter-spacing: 0.04em; color: var(--mute-d); font-variant-numeric: tabular-nums; }
+
+  /* ---------- 9 CTA */
+  .s9 .bgart { position: absolute; inset: 0; opacity: 0.2; }
+  .s9 .bgart img { filter: grayscale(1) contrast(1.05); }
+  .s9 .bgart::after { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at center, rgba(13,13,12,0.3) 0%, var(--dark) 78%); }
+  .s9 .c { position: absolute; left: var(--pad); right: var(--pad); top: 300px; text-align: center; }
+  .s9 h2 { font-size: 132px; margin-top: 36px; text-transform: uppercase; letter-spacing: 0.01em; line-height: 0.95; }
+  .s9 .cta { display: inline-flex; align-items: center; gap: 22px; margin-top: 70px; padding: 26px 46px; border: 1px solid rgba(240,235,226,0.5); font-size: 22px; letter-spacing: 0.2em; text-transform: uppercase; }
+  .s9 .foot { position: absolute; left: var(--pad); right: var(--pad); bottom: 120px; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; font-size: 21px; line-height: 1.55; color: var(--mute-d); }
+  .s9 .foot b { display: block; font-weight: 400; font-size: 16px; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 10px; color: var(--fg); }
+  .s9 .foot div:last-child { text-align: right; }
+</style>
+</head>
+<body>
+
+<!-- 1 — Cover -->
+<section class="slide s1" id="s1">
+  <div class="top"><span class="mark">HADEEL</span><span class="idx">01 / 09</span></div>
+  <div class="tile" style="left:348px; top:170px; width:384px; height:512px"><span>01</span><img src="../../public/art/the-hat.webp" alt="" /></div>
+  <div class="tile" style="left:84px; top:330px; width:210px; height:237px"><span>02</span><img src="../../public/art/anatomy-of-us.webp" alt="" /></div>
+  <div class="tile" style="left:800px; top:250px; width:196px; height:244px"><span>03</span><img src="../../public/art/veins.webp" alt="" /></div>
+  <div class="tile" style="left:130px; top:800px; width:250px; height:250px"><span>04</span><img src="../../public/art/cockatoo.webp" alt="" /></div>
+  <div class="tile" style="left:716px; top:760px; width:230px; height:286px"><span>05</span><img src="../../public/art/earring.webp" alt="" /></div>
+  <h1 class="title display">HADEEL</h1>
+  <div class="sub">
+    <span class="eyebrow">Original works · 2024 — 2026</span>
+    <p class="lede">A living gallery, now online.</p>
+  </div>
+  <span class="swipe">Swipe</span>
+  <div class="prog"><i style="width:11.11%"></i></div>
+</section>
+
+<!-- 2 — Exists once -->
+<section class="slide paper s2" id="s2">
+  <div class="top"><span class="mark">HADEEL</span><span class="idx">02 / 09</span></div>
+  <h2 class="display">Every canvas<br />exists <em>once.</em></h2>
+  <p class="body">Hadeel paints from a small studio with a north-facing window. This is not a store first. It is a room you walk through, and some of what hangs in it can go home with you.</p>
+  <div class="row">
+    <figure><div class="img"><img src="../../public/art/turban.webp" alt="" /></div><figcaption><b>Turban</b><span>2026</span></figcaption></figure>
+    <figure><div class="img"><img src="../../public/art/the-hat.webp" alt="" /></div><figcaption><b>The Hat</b><span>2026</span></figcaption></figure>
+    <figure><div class="img"><img src="../../public/art/half-wing.webp" alt="" /></div><figcaption><b>Half Wing</b><span>2025</span></figcaption></figure>
+  </div>
+  <div class="prog"><i style="width:22.22%"></i></div>
+</section>
+
+<!-- 3 — The site -->
+<section class="slide s3" id="s3">
+  <div class="top"><span class="mark">HADEEL</span><span class="idx">03 / 09</span></div>
+  <div class="head">
+    <span class="eyebrow">The website</span>
+    <h2 class="display">Walk through it<br />like a gallery.</h2>
+    <p class="body">Scroll, and canvases drift in from the edges, float over the title, then clear to a quiet room. On desktop and on your phone.</p>
+  </div>
+  <div class="browser"><div class="bar"><i></i><i></i><i></i><u>hadeel.art</u></div><div class="shot"><img src="shots/desk-home-tiles.png" alt="" /></div></div>
+  <div class="phone"><div class="shot"><img src="shots/mob-home.png" alt="" /></div></div>
+  <div class="prog"><i style="width:33.33%"></i></div>
+</section>
+
+<!-- 4 — Featured -->
+<section class="slide s4" id="s4">
+  <div class="top"><span class="mark">HADEEL</span><span class="idx">04 / 09</span></div>
+  <div class="hero"><img src="../../public/art/the-hat-room.webp" alt="" /></div>
+  <div class="cap">
+    <span class="eyebrow">01 / Featured work</span>
+    <div class="row"><h2 class="display">The Hat</h2><span class="price">EGP 48,900</span></div>
+    <p class="lede">Only greys. The brim was cut in one sitting, stripe by stripe, until the face disappeared beneath it.</p>
+    <p class="meta">Acrylic on canvas · 90 × 120 cm · 2026</p>
+  </div>
+  <div class="prog"><i style="width:44.44%"></i></div>
+</section>
+
+<!-- 5 — Shop -->
+<section class="slide paper s5" id="s5">
+  <div class="top"><span class="mark">HADEEL</span><span class="idx">05 / 09</span></div>
+  <div class="head">
+    <span class="eyebrow">The shop</span>
+    <h2 class="display">See it on a wall<br />before it’s on yours.</h2>
+  </div>
+  <div class="browser"><div class="bar"><i></i><i></i><i></i><u>hadeel.art/shop</u></div><div class="shot"><img src="shots/desk-shop-top.png" alt="" /></div></div>
+  <ul>
+    <li><b>In the room</b>Every piece shown framed, in real light.</li>
+    <li><b>Filter &amp; sort</b>By size, price, or what’s still available.</li>
+    <li><b>Simple checkout</b>Prices in EGP, cart saved as you browse.</li>
+  </ul>
+  <div class="prog"><i style="width:55.55%"></i></div>
+</section>
+
+<!-- 6 — Studio -->
+<section class="slide s6" id="s6">
+  <div class="top"><span class="mark">HADEEL</span><span class="idx">06 / 09</span></div>
+  <div class="head">
+    <span class="eyebrow">Inside the studio</span>
+    <h2 class="display">Behind<br />the canvas</h2>
+    <p class="body">Process, imperfections and everything between.</p>
+  </div>
+  <div class="grid">
+    <div class="step"><div class="img"><img src="../../public/art/process-sketch.webp" alt="" /></div><span>01 — Mark</span><p>The idea begins as a line.</p></div>
+    <div class="step"><div class="img"><img src="../../public/art/process-palette.webp" alt="" /></div><span>02 — Colour</span><p>Red holds tension. Blue opens space.</p></div>
+    <div class="step"><div class="img"><img src="../../public/art/process-texture.webp" alt="" /></div><span>03 — Surface</span><p>Built, scraped back, built again.</p></div>
+    <div class="step"><div class="img"><img src="../../public/art/half-wing.webp" alt="" /></div><span>04 — Release</span><p>The work leaves the hand.</p></div>
+  </div>
+  <div class="prog"><i style="width:66.66%"></i></div>
+</section>
+
+<!-- 7 — Statement -->
+<section class="slide paper s7" id="s7">
+  <div class="top"><span class="mark">HADEEL</span><span class="idx" style="color:#f3eee6;text-shadow:0 1px 8px rgba(0,0,0,.4)">07 / 09</span></div>
+  <div class="img"><img src="../../public/art/the-artist.png" alt="" /></div>
+  <div class="text">
+    <span class="eyebrow">Artist statement</span>
+    <blockquote class="display">“I paint the things I don’t know how to say.”</blockquote>
+    <p class="body">Hadeel works slowly, mostly at night, in layers of acrylic and oil that are scraped back and rebuilt until the surface holds a mood rather than an image.</p>
+    <p class="sig">— Hadeel</p>
+  </div>
+  <div class="prog" style="right:554px"><i style="width:77.77%"></i></div>
+</section>
+
+<!-- 8 — Available -->
+<section class="slide s8" id="s8">
+  <div class="top"><span class="mark">HADEEL</span><span class="idx">08 / 09</span></div>
+  <div class="head">
+    <div><span class="eyebrow">Available works</span><h2 class="display">Ready to leave<br />the studio</h2></div>
+    <div class="count">8 available<br />2 sold</div>
+  </div>
+  <div class="grid">
+    <div><div class="img"><img src="../../public/art/veins.webp" alt="" /></div><div class="cap"><b>Veins</b><span>EGP 40,600</span></div></div>
+    <div><div class="img"><img src="../../public/art/turban.webp" alt="" /></div><div class="cap"><b>Turban</b><span>EGP 35,400</span></div></div>
+    <div><div class="img"><img src="../../public/art/anatomy-of-us.webp" alt="" /></div><div class="cap"><b>Anatomy of Us</b><span>EGP 27,000</span></div></div>
+    <div><div class="img"><img src="../../public/art/earring.webp" alt="" /></div><div class="cap"><b>Earring</b><span>EGP 23,900</span></div></div>
+    <div><div class="img"><img src="../../public/art/cockatoo.webp" alt="" /></div><div class="cap"><b>Cockatoo</b><span>EGP 21,800</span></div></div>
+    <div><div class="img"><img src="../../public/art/half-wing.webp" alt="" /></div><div class="cap"><b>Half Wing</b><span>EGP 17,700</span></div></div>
+  </div>
+  <div class="prog"><i style="width:88.88%"></i></div>
+</section>
+
+<!-- 9 — CTA -->
+<section class="slide s9" id="s9">
+  <div class="top"><span class="mark">HADEEL</span><span class="idx">09 / 09</span></div>
+  <div class="bgart"><img src="../../public/art/the-hat.webp" alt="" /></div>
+  <div class="c">
+    <span class="eyebrow">Find a piece</span>
+    <h2 class="display">That speaks<br />to you.</h2>
+    <span class="cta">Link in bio &nbsp;→</span>
+  </div>
+  <div class="foot">
+    <div><b>Shipping</b>Worldwide. Every work is packed by hand and insured in transit.</div>
+    <div><b>Studio</b>studio@hadeel.art</div>
+  </div>
+  <div class="prog"><i style="width:100%"></i></div>
+</section>
+
+</body>
+</html>

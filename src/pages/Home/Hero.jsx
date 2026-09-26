@@ -1,7 +1,7 @@
-import { useLayoutEffect, useRef } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { gsap } from '../../lib/gsap.js';
-import { artworks, artUrl } from '../../data/catalog.mjs';
+import { artworks, artUrl, artSrcSet } from '../../data/catalog.mjs';
 import { SplitChars, SplitWordChars } from '../../lib/text.jsx';
 
 // Reference: the video intro. A centred serif title sits alone; on scroll, image
@@ -26,8 +26,32 @@ const TILES = [
 const ENTER = 0.14; // scroll fraction a tile takes to fly in
 const CLEAR = 0.8;  // by this point every tile has left through the top
 
+// Tiles only fly in once the visitor scrolls, so their images wait until the first
+// scroll intent (or a few seconds after load) instead of competing with first paint.
+const WAKE_EVENTS = ['scroll', 'wheel', 'touchstart', 'keydown', 'pointerdown'];
+
+function useTilesReady() {
+  const [ready, setReady] = useState(false);
+  useEffect(() => {
+    let timer;
+    const go = () => { cleanup(); setReady(true); };
+    const onLoad = () => { timer = setTimeout(go, 3000); };
+    function cleanup() {
+      WAKE_EVENTS.forEach((e) => window.removeEventListener(e, go));
+      window.removeEventListener('load', onLoad);
+      clearTimeout(timer);
+    }
+    WAKE_EVENTS.forEach((e) => window.addEventListener(e, go, { passive: true }));
+    if (document.readyState === 'complete') onLoad();
+    else window.addEventListener('load', onLoad);
+    return cleanup;
+  }, []);
+  return ready;
+}
+
 export default function Hero() {
   const root = useRef(null);
+  const tilesReady = useTilesReady();
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
@@ -60,9 +84,13 @@ export default function Hero() {
       tl.to('.hero-meta', { yPercent: -400, opacity: 0, duration: 0.45 }, 0.18);
 
       const vw = window.innerWidth / 100, vh = window.innerHeight / 100;
+      // Read every tile height before the fromTo calls below write transforms, so
+      // layout is computed once instead of once per tile.
+      const els = TILES.map((_, i) => root.current.querySelector(`[data-tile="${i}"]`));
+      const heights = els.map((el) => el.offsetHeight);
       TILES.forEach((t, i) => {
-        const el = root.current.querySelector(`[data-tile="${i}"]`);
-        const tileH = el.offsetHeight;
+        const el = els[i];
+        const tileH = heights[i];
         // Start fully outside the viewport on the chosen edge, with a little diagonal drift.
         const from = {
           left:   { x: -(t.x * vw + t.w * vw + 8 * vw), y: 10 * vh },
@@ -100,7 +128,7 @@ export default function Hero() {
     <section ref={root} className="hero">
       <div className="hero-stage">
         <div className="hero-titleblock">
-          <h1 className="hero-title"><SplitChars text="HADEEL" /></h1>
+          <h1 className="hero-title"><SplitChars text="LILLY BOUTIQUE" /></h1>
           <div className="hero-meta">
             <span>Original works</span>
             <span>2024 — 2026</span>
@@ -120,7 +148,13 @@ export default function Hero() {
                 className="hero-tile"
                 style={{ left: `${t.x}vw`, top: `${t.y}vh`, width: `${t.w}vw`, aspectRatio: `${a.width} / ${a.height}` }}
               >
-                <img src={artUrl(a.id)} alt="" loading="eager" />
+                <img
+                  src={tilesReady ? artUrl(a.id) : undefined}
+                  srcSet={tilesReady ? artSrcSet(a.id) : undefined}
+                  sizes={`${t.w}vw`}
+                  alt=""
+                  decoding="async"
+                />
               </figure>
             );
           })}

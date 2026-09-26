@@ -42,7 +42,14 @@ export default function Statement() {
         </p>
       </div>
       <figure className="st-img">
-        <img src="/art/the-artist.png" alt="Hadeel, the artist" loading="lazy" />
+        <img
+          src="/art/the-artist.webp"
+          srcSet="/art/the-artist-480.webp 480w, /art/the-artist-960.webp 960w, /art/the-artist.webp 1200w"
+          sizes="(max-width: 900px) 100vw, 50vw"
+          alt="Hadeel, the artist"
+          loading="lazy"
+          decoding="async"
+        />
       </figure>
     </section>
   );

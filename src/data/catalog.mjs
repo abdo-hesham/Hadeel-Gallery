@@ -26,9 +26,15 @@ export const studioShots = [
 
 export const artUrl = (id) => `/art/${id}.webp`;
 
+// Responsive variants from scripts/resize-art.mjs (<name>-480.webp, <name>-960.webp).
+// Originals are ~1100-1250px wide; 1200w is close enough for the browser's pick.
+const srcSetFor = (name) => `/art/${name}-480.webp 480w, /art/${name}-960.webp 960w, /art/${name}.webp 1200w`;
+export const artSrcSet = (id) => srcSetFor(id);
+
 // In-situ mockup (framed on a wall) for shop listings. Falls back to the flat image.
 // Room mockups are all roughly 3:4; the flat image keeps the work's real ratio.
 export const roomUrl = (a) => (a.room ? `/art/${a.id}-room.webp` : artUrl(a.id));
+export const roomSrcSet = (a) => srcSetFor(a.room ? `${a.id}-room` : a.id);
 export const roomRatio = (a) => (a.room ? '11 / 15' : `${a.width} / ${a.height}`);
 
 export const formatPrice = (value) => new Intl.NumberFormat('en-EG', {

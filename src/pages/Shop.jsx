@@ -1,7 +1,7 @@
 import { useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { gsap } from '../lib/gsap.js';
-import { artworks, roomUrl, roomRatio, formatPrice } from '../data/catalog.mjs';
+import { artworks, roomUrl, roomSrcSet, roomRatio, formatPrice } from '../data/catalog.mjs';
 import ArtworkDetail from '../components/ArtworkDetail.jsx';
 import Footer from '../components/Footer.jsx';
 
@@ -91,7 +91,7 @@ export default function Shop() {
             data-cursor={a.status === 'sold' ? 'Sold' : 'View'}
           >
             <figure style={{ aspectRatio: roomRatio(a) }}>
-              <img src={roomUrl(a)} alt={a.title} loading="lazy" />
+              <img src={roomUrl(a)} srcSet={roomSrcSet(a)} sizes="(max-width: 900px) 100vw, 40vw" alt={a.title} loading="lazy" decoding="async" />
               {a.status === 'sold' && <span className="sold-tag">Sold</span>}
             </figure>
             <div className="shop-meta">

@@ -64,6 +64,7 @@ ul, ol { padding: 0; list-style: none; }
 .display .line-mask, .display-sm .line-mask, .cl-title .line-mask, .st-quote .line-mask { display: block; overflow: hidden; padding-bottom: 0.08em; margin-bottom: -0.08em; }
 .line { display: block; will-change: transform; }
 .char-mask { display: inline-block; overflow: hidden; vertical-align: top; }
+.sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
 .char { display: inline-block; will-change: transform; }
 .eyebrow {
   display: block;
@@ -115,7 +116,8 @@ ul, ol { padding: 0; list-style: none; }
   padding: 22px var(--gutter);
   mix-blend-mode: difference; color: #fff;
 }
-.nav-brand { font-family: var(--serif); font-size: 20px; letter-spacing: 0.2em; }
+.nav-brand { font-family: var(--serif); font-size: 20px; letter-spacing: 0.2em; white-space: nowrap; }
+@media (max-width: 600px) { .nav-brand { font-size: 14px; letter-spacing: 0.14em; } }
 .nav-links { display: flex; gap: 28px; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; }
 .nav-links a { opacity: 0.6; transition: opacity 0.3s; }
 .nav-links a:hover, .nav-links a.active { opacity: 1; }
@@ -159,7 +161,7 @@ ul, ol { padding: 0; list-style: none; }
 }
 .hero-title {
   font-family: var(--serif); font-weight: 300;
-  font-size: clamp(5rem, 21vw, 22rem);
+  font-size: clamp(2.2rem, 9vw, 10rem);
   line-height: 0.85; letter-spacing: 0.02em;
   will-change: transform;
 }

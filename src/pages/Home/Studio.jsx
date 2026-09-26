@@ -191,7 +191,7 @@ export default function Studio() {
         <div className="sd-paint-move">
           <div className="sd-paint-frame" aria-hidden="true"><i /><i /><i /><i /></div>
           <figure className="sd-painting">
-            <img src={artUrl(a.id)} alt={a.title} loading="lazy" decoding="async" />
+            <img src={artUrl(a.id)} alt={a.alt || a.title} loading="lazy" decoding="async" />
           </figure>
           <span className="sd-frag-label eyebrow">Detail — in progress</span>
           <figcaption className="sd-caption">

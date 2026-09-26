@@ -30,7 +30,7 @@ export default function Featured() {
       <div className="ft-stage">
         <span className="ft-label eyebrow">01 / Featured work</span>
         <figure className="ft-img" style={{ aspectRatio: `${a.width} / ${a.height}` }}>
-          <img src={artUrl(a.id)} srcSet={artSrcSet(a.id)} sizes="(max-width: 900px) 74vw, 46vw" alt={a.title} loading="lazy" decoding="async" />
+          <img src={artUrl(a.id)} srcSet={artSrcSet(a.id)} sizes="(max-width: 900px) 74vw, 46vw" alt={a.alt || a.title} loading="lazy" decoding="async" />
         </figure>
         <div className="ft-caption">
           <h3 className="display-sm">{a.title}</h3>

@@ -6,9 +6,10 @@
   "scripts": {
     "dev": "vite",
     "art": "node scripts/gen-art.mjs && node scripts/rasterize.mjs",
-    "build": "vite build",
+    "build": "node scripts/gen-sitemap.mjs && vite build",
     "lint": "oxlint",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "sitemap": "node scripts/gen-sitemap.mjs"
   },
   "dependencies": {
     "gsap": "^3.15.0",

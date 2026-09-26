@@ -38,7 +38,7 @@ export default function Cart() {
             {items.map((a) => (
               <li key={a.id} className="cart-row">
                 <figure style={{ aspectRatio: `${a.width} / ${a.height}` }}>
-                  <img src={artUrl(a.id)} alt={a.title} />
+                  <img src={artUrl(a.id)} alt={a.alt || a.title} />
                 </figure>
                 <div className="cart-info">
                   <strong>{a.title}</strong>

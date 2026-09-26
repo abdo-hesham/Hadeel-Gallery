@@ -19,6 +19,11 @@ export default function Footer() {
           <Link to="/shop">Works</Link>
           <Link to="/cart">Cart</Link>
         </div>
+        <div className="footer-col">
+          <span className="eyebrow">Legal</span>
+          <Link to="/terms">Terms and Conditions</Link>
+          <Link to="/privacy">Privacy Policy</Link>
+        </div>
       </div>
       <div className="footer-bottom">
         <span className="signature">Lilly Boutique</span>

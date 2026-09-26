@@ -38,7 +38,7 @@ export default function Success() {
     <main ref={root} className="cf">
       <section className="cf-hero">
         <figure className="cf-art" style={{ aspectRatio: `${artwork.width} / ${artwork.height}` }}>
-          <img src={artUrl(artwork.id)} alt={artwork.title} />
+          <img src={artUrl(artwork.id)} alt={artwork.alt || artwork.title} />
         </figure>
         <h1 className="cf-title"><SplitChars text="Order received." /></h1>
         <div className="cf-body">

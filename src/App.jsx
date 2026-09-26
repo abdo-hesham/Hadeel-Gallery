@@ -12,6 +12,9 @@ const Shop = lazy(() => import('./pages/Shop.jsx'));
 const Cart = lazy(() => import('./pages/Cart.jsx'));
 const Checkout = lazy(() => import('./pages/Checkout.jsx'));
 const Success = lazy(() => import('./pages/Success.jsx'));
+const Terms = lazy(() => import('./pages/Terms.jsx'));
+const Privacy = lazy(() => import('./pages/Privacy.jsx'));
+const NotFound = lazy(() => import('./pages/NotFound.jsx'));
 const page = (el) => <Suspense fallback={null}>{el}</Suspense>;
 
 export default function App() {
@@ -35,6 +38,9 @@ export default function App() {
             <Route path="/checkout" element={page(<Checkout />)} />
             <Route path="/success" element={page(<Success />)} />
             <Route path="/confirmation" element={<Navigate to="/success" replace />} />
+            <Route path="/terms" element={page(<Terms />)} />
+            <Route path="/privacy" element={page(<Privacy />)} />
+            <Route path="*" element={page(<NotFound />)} />
           </Routes>
         </PageTransition>
       </SmoothScroll>

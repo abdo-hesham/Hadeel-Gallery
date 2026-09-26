@@ -37,7 +37,7 @@ export default function Confirmation() {
     <main ref={root} className="cf">
       <section className="cf-hero">
         <figure className="cf-art" style={{ aspectRatio: `${a.width} / ${a.height}` }}>
-          <img src={artUrl(a.id)} alt={a.title} />
+          <img src={artUrl(a.id)} alt={a.alt || a.title} />
         </figure>
         <h1 className="cf-title"><SplitChars text="It’s yours." /></h1>
         <div className="cf-body">

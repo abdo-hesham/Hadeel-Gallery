@@ -51,7 +51,7 @@ export default function ArtworkDetail({ artwork: a, onClose }) {
       <aside className="ad-panel" data-lenis-prevent>
         <button className="ad-close" onClick={close} aria-label="Close">Close ×</button>
         <figure className="ad-img" style={{ aspectRatio: `${a.width} / ${a.height}` }}>
-          <img src={artUrl(a.id)} alt={a.title} />
+          <img src={artUrl(a.id)} alt={a.alt || a.title} />
         </figure>
         <div className="ad-info">
           <span className="eyebrow">Original artwork · 1 of 1</span>

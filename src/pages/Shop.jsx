@@ -91,7 +91,7 @@ export default function Shop() {
             data-cursor={a.status === 'sold' ? 'Sold' : 'View'}
           >
             <figure style={{ aspectRatio: roomRatio(a) }}>
-              <img src={roomUrl(a)} srcSet={roomSrcSet(a)} sizes="(max-width: 900px) 100vw, 40vw" alt={a.title} loading="lazy" decoding="async" />
+              <img src={roomUrl(a)} srcSet={roomSrcSet(a)} sizes="(max-width: 900px) 100vw, 40vw" alt={a.alt || a.title} loading="lazy" decoding="async" />
               {a.status === 'sold' && <span className="sold-tag">Sold</span>}
             </figure>
             <div className="shop-meta">

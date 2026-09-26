@@ -61,7 +61,7 @@ export default function SelectedWorks() {
             >
               <span className="sw-index">{String(i + 1).padStart(2, '0')}</span>
               <figure style={{ aspectRatio: `${a.width} / ${a.height}` }}>
-                <img src={artUrl(a.id)} srcSet={artSrcSet(a.id)} sizes={`(max-width: 900px) 44vw, ${l.w}vw`} alt={a.title} loading="lazy" decoding="async" />
+                <img src={artUrl(a.id)} srcSet={artSrcSet(a.id)} sizes={`(max-width: 900px) 44vw, ${l.w}vw`} alt={a.alt || a.title} loading="lazy" decoding="async" />
               </figure>
               <figcaption className="sw-cap">
                 <strong>{a.title}</strong>

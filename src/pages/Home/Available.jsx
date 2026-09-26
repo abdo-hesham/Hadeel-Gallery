@@ -54,7 +54,7 @@ export default function Available() {
                   src={handoff ? artUrl(a.id) : roomUrl(a)}
                   srcSet={handoff ? artSrcSet(a.id) : roomSrcSet(a)}
                   sizes="(max-width: 900px) 100vw, 50vw"
-                  alt={a.title}
+                  alt={a.alt || a.title}
                   loading="lazy"
                   decoding="async"
                 />

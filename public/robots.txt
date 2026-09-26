@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /cart
+Disallow: /checkout
+Disallow: /success
+Disallow: /confirmation
+
+Sitemap: https://lillyboutique.com/sitemap.xml

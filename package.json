@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "art": "node scripts/gen-art.mjs && node scripts/rasterize.mjs",
+    "art:sizes": "node scripts/resize-art.mjs",
     "build": "node scripts/gen-sitemap.mjs && vite build",
     "lint": "oxlint",
     "preview": "vite preview",

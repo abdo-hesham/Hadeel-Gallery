@@ -4,7 +4,7 @@ import { gsap } from '../lib/gsap.js';
 import { useCart } from '../lib/CartContext.jsx';
 import { artUrl, formatPrice } from '../data/catalog.mjs';
 
-const SHIPPING = { standard: { label: 'Standard', days: '7–10 business days', price: 2350 }, express: { label: 'Express', days: '2–4 business days', price: 6250 } };
+const SHIPPING = { standard: { label: 'Standard', days: '7–10 business days', price: 0 }, express: { label: 'Express', days: '2–4 business days', price: 0 } };
 const PAYMENTS = {
   cod: { label: 'Cash on delivery', note: 'Pay in cash when your artwork arrives.' },
   instapay: { label: 'Instapay', note: 'The studio will contact you with the transfer details before dispatch.' },

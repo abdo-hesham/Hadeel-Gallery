@@ -17,7 +17,7 @@ const SEGMENTS = [
   [10087, 6],     // featured (pinned zoom)
   [14407, 8],     // studio (pinned)
   [17113, 8],     // available works (card reveals 1.2s each)
-  [17543, 3],     // closing
+  [17543, 3],     // closing + footer
   [17543, 2.5],   // hold end
 ];
 const smooth = (t) => t * t * (3 - 2 * t);
@@ -36,6 +36,14 @@ await page.addInitScript(() => {
 });
 await page.goto('http://localhost:5179/', { waitUntil: 'networkidle' });
 await page.evaluate(() => document.fonts.ready);
+// Hero tiles defer their src until first scroll/keydown intent. Wake them without scrolling.
+await page.evaluate(() => window.dispatchEvent(new KeyboardEvent('keydown', { key: 'Shift' })));
+for (let i = 0; i < 100; i++) {
+  const ok = await page.evaluate(() => [...document.querySelectorAll('.hero-tile img')].every((im) => im.getAttribute('src')));
+  if (ok) break;
+  await page.clock.runFor(16);
+  await page.waitForTimeout(50);
+}
 // Wait until every image on the page is fully loaded and decoded.
 await page.evaluate(async () => {
   document.querySelectorAll('img[loading]').forEach((i) => i.removeAttribute('loading'));

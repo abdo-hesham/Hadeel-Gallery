@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>Hadeel — site scroll reel</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: 'Cormorant Garamond'; font-weight: 300; font-style: normal; src: url('assets/fonts/cormorant-300.woff') format('woff'); }
+      @font-face { font-family: 'Cormorant Garamond'; font-weight: 300; font-style: italic; src: url('assets/fonts/cormorant-300i.woff') format('woff'); }
+      @font-face { font-family: 'Cormorant Garamond'; font-weight: 400; font-style: normal; src: url('assets/fonts/cormorant-400.woff') format('woff'); }
+      @font-face { font-family: 'Inter Tight'; font-weight: 300; src: url('assets/fonts/intertight-300.woff') format('woff'); }
+      @font-face { font-family: 'Inter Tight'; font-weight: 400; src: url('assets/fonts/intertight-400.woff') format('woff'); }
+      @font-face { font-family: 'Inter Tight'; font-weight: 500; src: url('assets/fonts/intertight-500.woff') format('woff'); }
+
+      :root {
+        --bg: #0d0d0c; --fg: #f0ebe2; --mute: #8c877d; --line: rgba(240,235,226,0.14);
+        --serif: 'Cormorant Garamond', serif; --sans: 'Inter Tight', sans-serif;
+      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--bg); }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; background: var(--bg); color: var(--fg); font-family: var(--sans); font-weight: 300; }
+      .clip { position: absolute; inset: 0; }
+
+      .grain { position: absolute; inset: 0; background: radial-gradient(1200px 900px at 50% 42%, rgba(240,235,226,0.05), transparent 70%); }
+      .rule { position: absolute; left: 72px; right: 72px; height: 1px; background: var(--line); }
+
+      .head { position: absolute; left: 72px; right: 72px; top: 250px; }
+      .eyebrow { display: block; font-size: 22px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--mute); font-weight: 400; }
+      .brand { font-family: var(--serif); font-weight: 300; font-size: 168px; line-height: 0.95; letter-spacing: -0.01em; margin-top: 18px; }
+      .brand .w { display: block; overflow: hidden; padding-bottom: 0.08em; margin-bottom: -0.08em; }
+      .brand .w span { display: block; }
+      .tag { font-family: var(--serif); font-style: italic; font-weight: 300; font-size: 54px; line-height: 1.1; color: var(--mute); margin-top: 14px; }
+
+      .win-wrap { position: absolute; left: 40px; top: 690px; width: 1000px; perspective: 1800px; }
+      .win { width: 1000px; height: 679px; border-radius: 18px; overflow: hidden; background: #161614; box-shadow: 0 60px 120px rgba(0,0,0,0.6), 0 0 0 1px rgba(240,235,226,0.10); }
+      .bar { height: 54px; display: flex; align-items: center; padding: 0 22px; gap: 10px; background: #1c1c1a; border-bottom: 1px solid rgba(240,235,226,0.08); }
+      .dot { width: 13px; height: 13px; border-radius: 50%; background: #3a3a37; }
+      .url { flex: 1; margin-left: 18px; height: 30px; border-radius: 8px; background: #0f0f0e; display: flex; align-items: center; justify-content: center; font-size: 15px; letter-spacing: 0.06em; color: var(--mute); }
+      #site { position: absolute; left: 40px; top: 744px; width: 1000px; height: 625px; object-fit: cover; border-radius: 0 0 18px 18px; }
+      .desk { position: absolute; left: 40px; width: 1000px; top: 1392px; display: flex; justify-content: space-between; font-size: 20px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--mute); }
+
+      .cap { position: absolute; left: 72px; right: 72px; top: 1470px; }
+      .cap .eyebrow { margin-bottom: 14px; }
+      .cap .line { font-family: var(--serif); font-weight: 300; font-size: 64px; line-height: 1.05; letter-spacing: -0.01em; }
+      .cap .line.it { font-style: italic; }
+      .progress { position: absolute; left: 72px; right: 72px; top: 1660px; height: 2px; background: var(--line); }
+      .progress i { position: absolute; left: 0; top: 0; height: 100%; width: 100%; background: var(--fg); transform-origin: left center; }
+      .steps { position: absolute; left: 72px; right: 72px; top: 1684px; display: flex; justify-content: space-between; font-size: 18px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--mute); }
+
+      .end { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; background: var(--bg); padding-bottom: 260px; }
+      .end .big { font-family: var(--serif); font-weight: 300; font-size: 150px; line-height: 0.95; letter-spacing: -0.015em; }
+      .end .big .w { display: block; overflow: hidden; padding-bottom: 0.08em; margin-bottom: -0.08em; }
+      .end .big .w span { display: block; }
+      .end .big .it { font-style: italic; color: var(--mute); }
+      .end .cta { margin-top: 70px; display: inline-flex; align-items: center; gap: 22px; font-size: 26px; letter-spacing: 0.22em; text-transform: uppercase; font-weight: 400; }
+      .end .cta i { display: block; width: 90px; height: 1px; background: var(--fg); }
+      .end .small { margin-top: 26px; font-size: 22px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--mute); }
+      .end .thumbs { position: absolute; left: 0; right: 0; bottom: 220px; display: flex; justify-content: center; gap: 18px; }
+      .end .thumbs img { width: 150px; height: 190px; object-fit: cover; border-radius: 4px; display: block; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="55.5" data-width="1080" data-height="1920">
+
+      <section id="tour" class="clip" data-start="0" data-duration="51.5" data-track-index="0">
+        <div class="grain"></div>
+        <div class="rule" style="top: 214px"></div>
+
+        <div class="head" id="head">
+          <span class="eyebrow" id="hd-eyebrow">New website · Original works 2024 — 2026</span>
+          <h1 class="brand"><span class="w"><span id="hd-brand">Hadeel</span></span></h1>
+          <p class="tag" id="hd-tag">The artist's living gallery</p>
+        </div>
+
+        <div class="win-wrap"><div class="win" id="win">
+          <div class="bar"><i class="dot"></i><i class="dot"></i><i class="dot"></i><div class="url">hadeel — original works</div></div>
+        </div></div>
+        <div class="desk" id="desk"><span>Desktop · 1440 × 900</span><span>Scroll to enter</span></div>
+
+        <div class="cap" id="cap">
+          <span class="eyebrow" id="cap-eyebrow">01 — Scroll-driven hero</span>
+          <p class="line" id="cap-l1">Ten paintings fly in</p>
+          <p class="line it" id="cap-l2">as you scroll.</p>
+        </div>
+        <div class="progress" id="progress"><i id="prog"></i></div>
+        <div class="steps" id="steps"><span>Hero</span><span>Works</span><span>Statement</span><span>Featured</span><span>Studio</span><span>Shop</span></div>
+      </section>
+
+      <video id="site" class="clip" src="assets/site-scroll.mp4" data-start="0" data-duration="51.5" data-track-index="1" muted playsinline></video>
+
+      <!-- Music slot. Drop a licensed track at assets/music.mp3 and uncomment:
+      <audio id="bgm" src="assets/music.mp3" data-start="0" data-duration="55.5" data-volume="0.9"></audio>
+      Then in the timeline: tl.fromTo('#bgm',{volume:0},{volume:0.9,duration:1.5},0)
+                            .to('#bgm',{volume:0.55,duration:0.8},50.9)
+                            .to('#bgm',{volume:0,duration:1.5},54); -->
+      <section id="end" class="clip end" data-start="51.5" data-duration="4" data-track-index="2">
+        <div class="big">
+          <span class="w"><span id="end-l1">Own a piece</span></span>
+          <span class="w"><span id="end-l2" class="it">that speaks to you.</span></span>
+        </div>
+        <div class="cta" id="end-cta"><i></i><span>Link in bio</span><i></i></div>
+        <p class="small" id="end-small">Original works · Worldwide shipping</p>
+        <div class="thumbs" id="end-thumbs">
+          <img src="assets/art/the-hat.webp" alt="" />
+          <img src="assets/art/veins.webp" alt="" />
+          <img src="assets/art/anatomy-of-us.webp" alt="" />
+          <img src="assets/art/earring.webp" alt="" />
+          <img src="assets/art/turban.webp" alt="" />
+        </div>
+      </section>
+    </div>
+
+    <script>
+      const CAPS = [
+        [0,    '01 — Scroll-driven hero',  'Ten paintings fly in',   'as you scroll.'],
+        [12.5, '02 — Selected works',      'Floating canvases,',     'each one an original.'],
+        [19.5, '03 — Artist statement',    'Built slowly,',          'mostly at night.'],
+        [23.5, '04 — Featured work',       'One canvas,',            'pinned and zoomed.'],
+        [30,   '05 — Inside the studio',   'Process, imperfections', 'and everything between.'],
+        [38,   '06 — Available works',     'Sizes, prices,',         'add to cart.'],
+        [46,   'Enter the gallery',        'Find the piece',         'that speaks to you.'],
+      ];
+      const setCap = (c) => {
+        document.getElementById('cap-eyebrow').textContent = c[1];
+        document.getElementById('cap-l1').textContent = c[2];
+        document.getElementById('cap-l2').textContent = c[3];
+      };
+      const tl = gsap.timeline({ paused: true, defaults: { ease: 'power3.out' } });
+
+      // Intro: header rises, window settles in from a slight tilt.
+      tl.fromTo('#hd-brand', { yPercent: 110 }, { yPercent: 0, duration: 1.1, ease: 'expo.out' }, 0.15)
+        .fromTo('#hd-eyebrow', { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.7 }, 0.1)
+        .fromTo('#hd-tag', { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.8 }, 0.6)
+        .fromTo('#win', { opacity: 0, y: 90, rotateX: 14, scale: 0.94, transformOrigin: '50% 100%' }, { opacity: 1, y: 0, rotateX: 0, scale: 1, duration: 1.3, ease: 'expo.out' }, 0.35)
+        .fromTo('#site', { opacity: 0, y: 90, scale: 0.94, transformOrigin: '50% 50%' }, { opacity: 1, y: 0, scale: 1, duration: 1.3, ease: 'expo.out' }, 0.35)
+        .fromTo(['#desk', '#steps', '#progress'], { opacity: 0 }, { opacity: 1, duration: 0.6 }, 1.0);
+
+      // Progress line follows the capture: 2.5s hold, 46.5s of scrolling, then hold.
+      tl.fromTo('#prog', { scaleX: 0 }, { scaleX: 1, duration: 46.5, ease: 'none' }, 2.5);
+
+      // Captions: first one enters with the intro, later ones swap in place.
+      tl.fromTo(['#cap-eyebrow', '#cap-l1', '#cap-l2'], { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.8, stagger: 0.08 }, 1.1);
+      CAPS.slice(1).forEach((c) => {
+        const at = c[0];
+        tl.to(['#cap-l1', '#cap-l2', '#cap-eyebrow'], { opacity: 0, y: -18, duration: 0.35, ease: 'power2.in', stagger: 0.04 }, at - 0.45)
+          .fromTo(['#cap-eyebrow', '#cap-l1', '#cap-l2'], { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.7, stagger: 0.07 }, at);
+      });
+      // Seek-safe caption text: derived from timeline time, never from playback order.
+      tl.eventCallback('onUpdate', () => {
+        const t = tl.time();
+        let cur = CAPS[0];
+        for (const c of CAPS) if (t >= c[0] - 0.02) cur = c;
+        setCap(cur);
+      });
+
+      // Outro: tour dims, end card rises.
+      tl.to(['#win', '#site'], { opacity: 0, y: -40, scale: 0.97, duration: 0.6, ease: 'power2.in' }, 50.9)
+        .to(['#head', '#cap', '#progress', '#steps', '#desk'], { opacity: 0, duration: 0.5, ease: 'power2.in' }, 50.9)
+        .fromTo('#end-l1', { yPercent: 110 }, { yPercent: 0, duration: 1.0, ease: 'expo.out' }, 51.55)
+        .fromTo('#end-l2', { yPercent: 110 }, { yPercent: 0, duration: 1.0, ease: 'expo.out' }, 51.7)
+        .fromTo('#end-cta', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.8 }, 52.2)
+        .fromTo('#end-small', { opacity: 0 }, { opacity: 1, duration: 0.8 }, 52.5)
+        .fromTo('#end-thumbs img', { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.8, stagger: 0.08 }, 52.1);
+
+      window.__timelines['main'] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

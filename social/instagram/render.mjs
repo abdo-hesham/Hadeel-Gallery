@@ -14,7 +14,7 @@ await page.evaluate(() => document.fonts.ready);
 await page.waitForTimeout(500);
 const slides = await page.$$('.slide');
 for (const [i, el] of slides.entries()) {
-  const name = `hadeel-carousel-${String(i + 1).padStart(2, '0')}.png`;
+  const name = `lillys-boutique-carousel-${String(i + 1).padStart(2, '0')}.png`;
   await el.screenshot({ path: out + name });
   console.log('saved', name);
 }

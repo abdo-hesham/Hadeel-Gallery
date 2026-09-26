@@ -1,6 +1,7 @@
-import { useLayoutEffect, useRef } from 'react';
+import { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { gsap } from '../../lib/gsap.js';
+import { useScene } from '../../lib/useScene.js';
 import { artworks, artUrl, artSrcSet } from '../../data/catalog.mjs';
 
 // Paintings scattered over a tall canvas; each moves at its own speed on scroll.
@@ -16,27 +17,24 @@ const LAYOUT = [
 export default function SelectedWorks() {
   const root = useRef(null);
 
-  useLayoutEffect(() => {
-    const ctx = gsap.context(() => {
-      // Parallax travel is shorter on phones so items stay close together.
-      gsap.matchMedia().add({ desktop: '(min-width: 901px)', mobile: '(max-width: 900px)' }, (c) => {
-        const amp = c.conditions.mobile ? 0.35 : 1;
-        gsap.utils.toArray('.sw-item').forEach((el) => {
-          const speed = Number(el.dataset.speed);
-          gsap.fromTo(
-            el,
-            { y: 120 * speed * amp },
-            { y: -220 * speed * amp, ease: 'none', scrollTrigger: { trigger: root.current, start: 'top bottom', end: 'bottom top', scrub: true } }
-          );
-        });
+  useScene(root, () => {
+    // Parallax travel is shorter on phones so items stay close together.
+    gsap.matchMedia().add({ desktop: '(min-width: 901px)', mobile: '(max-width: 900px)' }, (c) => {
+      const amp = c.conditions.mobile ? 0.35 : 1;
+      gsap.utils.toArray('.sw-item').forEach((el) => {
+        const speed = Number(el.dataset.speed);
+        gsap.fromTo(
+          el,
+          { y: 120 * speed * amp },
+          { y: -220 * speed * amp, ease: 'none', scrollTrigger: { trigger: root.current, start: 'top bottom', end: 'bottom top', scrub: true } }
+        );
       });
-      gsap.from('.sw-head .line', {
-        yPercent: 110, stagger: 0.12, duration: 1.2, ease: 'expo.out',
-        scrollTrigger: { trigger: '.sw-head', start: 'top 85%' },
-      });
-    }, root);
-    return () => ctx.revert();
-  }, []);
+    });
+    gsap.from('.sw-head .line', {
+      yPercent: 110, stagger: 0.12, duration: 1.2, ease: 'expo.out',
+      scrollTrigger: { trigger: '.sw-head', start: 'top 85%' },
+    });
+  }, { waitForInput: true });
 
   return (
     <section ref={root} className="sw">

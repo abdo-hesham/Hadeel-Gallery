@@ -138,6 +138,7 @@ ul, ol { padding: 0; list-style: none; }
   position: fixed; inset: 0; z-index: 900; background: #0d0d0c; color: #f0ebe2;
   display: grid; place-items: center; pointer-events: none;
   font-family: var(--serif); letter-spacing: 0.3em; font-size: 14px;
+  transform: translateY(-100%); /* parked above the viewport until a route change */
 }
 
 /* ------------------------------------------------------------------ footer */
@@ -187,6 +188,14 @@ ul, ol { padding: 0; list-style: none; }
 .hero-ctawrap { margin-top: 12px; }
 .hero-cta { pointer-events: auto; }
 .hero-tiles { position: absolute; inset: 0; z-index: 3; pointer-events: none; }
+.hero:not(.is-armed) .hero-tiles { visibility: hidden; }
+/* Intro start states until Hero's intro timeline takes over (adds .is-intro). */
+.hero:not(.is-intro) .hero-title .char { transform: translateY(110%); }
+/* Meta lines and the CTA are visible from the first paint and only slide into place:
+   fading them in made the CTA (the largest text painted early) the LCP, ~2 s late. */
+.hero:not(.is-intro) .hero-meta > * { transform: translateY(20px); }
+.hero:not(.is-intro) .hero-cta { transform: translateY(16px); }
+.hero:not(.is-intro) .hero-scrollhint { opacity: 0; }
 .hero-tile {
   position: absolute; will-change: transform;
   box-shadow: 0 30px 80px rgba(0,0,0,0.5);

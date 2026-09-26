@@ -3,16 +3,16 @@
 // match the image aspect ratio.
 
 export const artworks = [
-  { id: 'the-hat',         title: 'The Hat',          medium: 'Acrylic on canvas',        width: 90, height: 120, year: 2026, price: 48900, status: 'available', size: 'large',  room: true, alt: 'Greyscale painting of a woman in a wide striped sun hat, face hidden by the brim, one arm crossed over her chest with stacked bangles' },
-  { id: 'anatomy-of-us',   title: 'Anatomy of Us',    medium: 'Acrylic on canvas',        width: 62, height: 70,  year: 2026, price: 27000, status: 'available', size: 'medium', room: true, alt: 'Illustrated couple embracing; the man wears a green shirt with an anatomical heart and yellow flowers, against a wall of hand-drawn hearts' },
-  { id: 'veins',           title: 'Veins',            medium: 'Acrylic on canvas',        width: 80, height: 100, year: 2026, price: 40600, status: 'available', size: 'large',  room: true, alt: 'Abstract botanical painting: white line-drawn leaves with fine veins over ochre, sage green and dark brown colour fields' },
-  { id: 'earring',         title: 'Earring',          medium: 'Oil on canvas',            width: 56, height: 70,  year: 2025, price: 23900, status: 'available', size: 'medium', room: true, alt: 'Impasto portrait from behind of a woman with dark bobbed hair and a gold hoop earring, red top, on a rose pink background' },
-  { id: 'night-on-a-case', title: 'Night on a Case',  medium: 'Acrylic on phone case',    width: 8,  height: 12,  year: 2025, price: 4700,  status: 'available', size: 'small', alt: 'Blue phone case hand-painted with a Starry Night style swirling sky, yellow moon and a dark cypress tree' },
-  { id: 'pear-and-roses',  title: 'Pear and Roses',   medium: 'Gouache on paper',         width: 32, height: 40,  year: 2024, price: 13500, status: 'sold',      size: 'small', alt: 'Gouache still life of a green pear beside a bouquet of pink roses on a dark wooden board, framed by dried petals' },
-  { id: 'turban',          title: 'Turban',           medium: 'Oil on canvas',            width: 60, height: 80,  year: 2026, price: 35400, status: 'available', size: 'medium', room: true, alt: 'Cubist portrait of a woman in a red and orange turban with gold hoop earrings, painted in flat geometric planes of blue, green and terracotta' },
-  { id: 'half-wing',       title: 'Half Wing',        medium: 'Acrylic on canvas',        width: 40, height: 40,  year: 2025, price: 17700, status: 'available', size: 'small', room: true, alt: 'Half of a butterfly painted on beige canvas: brown, white, red and blue wing cells outlined in black, with antenna and body at the right edge' },
-  { id: 'cockatoo',        title: 'Cockatoo',         medium: 'Oil on canvas',            width: 50, height: 50,  year: 2025, price: 21800, status: 'available', size: 'medium', room: true, alt: 'Textured painting of a white cockatoo with a yellow crest and dark eye against a black, star-speckled sky' },
-  { id: 'one-milkshake',   title: 'One Milkshake',    medium: 'Coloured pencil on paper', width: 31, height: 40,  year: 2024, price: 11400, status: 'sold',      size: 'small', room: true, alt: 'Coloured pencil drawing of an elderly couple sharing one pink milkshake through two straws, she in a floral blouse, he in a plaid shirt and hat' },
+  { id: 'the-hat',         title: 'The Hat',          medium: 'Acrylic on canvas',        width: 90, height: 120, year: 2026, price: 0, status: 'available', size: 'large',  room: true, alt: 'Greyscale painting of a woman in a wide striped sun hat, face hidden by the brim, one arm crossed over her chest with stacked bangles' },
+  { id: 'anatomy-of-us',   title: 'Anatomy of Us',    medium: 'Acrylic on canvas',        width: 62, height: 70,  year: 2026, price: 0, status: 'available', size: 'medium', room: true, alt: 'Illustrated couple embracing; the man wears a green shirt with an anatomical heart and yellow flowers, against a wall of hand-drawn hearts' },
+  { id: 'veins',           title: 'Veins',            medium: 'Acrylic on canvas',        width: 80, height: 100, year: 2026, price: 0, status: 'available', size: 'large',  room: true, alt: 'Abstract botanical painting: white line-drawn leaves with fine veins over ochre, sage green and dark brown colour fields' },
+  { id: 'earring',         title: 'Earring',          medium: 'Oil on canvas',            width: 56, height: 70,  year: 2025, price: 0, status: 'available', size: 'medium', room: true, alt: 'Impasto portrait from behind of a woman with dark bobbed hair and a gold hoop earring, red top, on a rose pink background' },
+  { id: 'night-on-a-case', title: 'Night on a Case',  medium: 'Acrylic on phone case',    width: 8,  height: 12,  year: 2025, price: 0,  status: 'available', size: 'small', alt: 'Blue phone case hand-painted with a Starry Night style swirling sky, yellow moon and a dark cypress tree' },
+  { id: 'pear-and-roses',  title: 'Pear and Roses',   medium: 'Gouache on paper',         width: 32, height: 40,  year: 2024, price: 0, status: 'sold',      size: 'small', alt: 'Gouache still life of a green pear beside a bouquet of pink roses on a dark wooden board, framed by dried petals' },
+  { id: 'turban',          title: 'Turban',           medium: 'Oil on canvas',            width: 60, height: 80,  year: 2026, price: 0, status: 'available', size: 'medium', room: true, alt: 'Cubist portrait of a woman in a red and orange turban with gold hoop earrings, painted in flat geometric planes of blue, green and terracotta' },
+  { id: 'half-wing',       title: 'Half Wing',        medium: 'Acrylic on canvas',        width: 40, height: 40,  year: 2025, price: 0, status: 'available', size: 'small', room: true, alt: 'Half of a butterfly painted on beige canvas: brown, white, red and blue wing cells outlined in black, with antenna and body at the right edge' },
+  { id: 'cockatoo',        title: 'Cockatoo',         medium: 'Oil on canvas',            width: 50, height: 50,  year: 2025, price: 0, status: 'available', size: 'medium', room: true, alt: 'Textured painting of a white cockatoo with a yellow crest and dark eye against a black, star-speckled sky' },
+  { id: 'one-milkshake',   title: 'One Milkshake',    medium: 'Coloured pencil on paper', width: 31, height: 40,  year: 2024, price: 0, status: 'sold',      size: 'small', room: true, alt: 'Coloured pencil drawing of an elderly couple sharing one pink milkshake through two straws, she in a floral blouse, he in a plaid shirt and hat' },
 ];
 
 // Studio shots are generated placeholders (see scripts/gen-art.mjs).
@@ -37,8 +37,10 @@ export const roomUrl = (a) => (a.room ? `/art/${a.id}-room.webp` : artUrl(a.id))
 export const roomSrcSet = (a) => srcSetFor(a.room ? `${a.id}-room` : a.id);
 export const roomRatio = (a) => (a.room ? '11 / 15' : `${a.width} / ${a.height}`);
 
-export const formatPrice = (value) => new Intl.NumberFormat('en-EG', {
+// One shared formatter: constructing Intl.NumberFormat per call is slow.
+const priceFormat = new Intl.NumberFormat('en-EG', {
   style: 'currency',
   currency: 'EGP',
   maximumFractionDigits: 0,
-}).format(value);
+});
+export const formatPrice = (value) => priceFormat.format(value);

@@ -12,9 +12,10 @@ export default function PageTransition({ children }) {
   const first = useRef(true);
 
   useLayoutEffect(() => {
+    // First mount: the CSS already parks the curtain above the viewport. Setting it
+    // here with gsap would force the page's first full layout inside this commit.
     if (first.current) {
       first.current = false;
-      gsap.set(curtain.current, { yPercent: -100 });
       return;
     }
     if (shown.key === location.pathname) {
@@ -22,7 +23,7 @@ export default function PageTransition({ children }) {
       return;
     }
     const tl = gsap.timeline();
-    tl.set(curtain.current, { yPercent: 100 })
+    tl.set(curtain.current, { yPercent: 100, y: 0 }) // y: 0 drops the px offset gsap reads from the CSS transform
       .to(curtain.current, { yPercent: 0, duration: 0.6, ease: 'power4.inOut' })
       .add(() => {
         ScrollTrigger.getAll().forEach((t) => t.kill());

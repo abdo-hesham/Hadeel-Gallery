@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<title>Hadeel — Instagram carousel</title>
+<title>Lilly's Boutique carousel</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter+Tight:wght@300;400;500&display=swap" rel="stylesheet" />
@@ -25,7 +25,7 @@
 
   /* shared chrome: wordmark, index, progress */
   .top { position: absolute; top: 64px; left: var(--pad); right: var(--pad); display: flex; justify-content: space-between; align-items: center; z-index: 10; }
-  .mark { font-family: var(--serif); font-size: 30px; letter-spacing: 0.32em; font-weight: 400; }
+  .mark { font-family: var(--serif); font-size: 26px; letter-spacing: 0.2em; font-weight: 400; white-space: nowrap; }
   .idx { font-size: 18px; letter-spacing: 0.18em; color: var(--mute-d); font-variant-numeric: tabular-nums; }
   .paper .idx { color: var(--mute); }
   .prog { position: absolute; left: var(--pad); right: var(--pad); bottom: 64px; height: 2px; background: rgba(240,235,226,0.14); z-index: 10; }
@@ -42,7 +42,7 @@
   /* ---------- 1 cover */
   .s1 .tile { position: absolute; box-shadow: 0 30px 60px rgba(0,0,0,0.55); }
   .s1 .tile span { position: absolute; top: -30px; left: 0; font-size: 15px; letter-spacing: 0.18em; color: var(--mute-d); }
-  .s1 .title { position: absolute; left: 0; right: 0; top: 560px; text-align: center; font-size: 238px; letter-spacing: 0.01em; z-index: 5; mix-blend-mode: difference; color: #f0ebe2; }
+  .s1 .title { position: absolute; left: 0; right: 0; top: 560px; text-align: center; font-size: 164px; line-height: 0.92; letter-spacing: 0.01em; z-index: 5; mix-blend-mode: difference; color: #f0ebe2; }
   .s1 .sub { position: absolute; left: 0; right: 0; bottom: 170px; text-align: center; z-index: 5; }
   .s1 .sub .lede { font-style: italic; font-weight: 300; font-size: 46px; margin-top: 18px; }
   .swipe { position: absolute; right: var(--pad); bottom: 96px; font-size: 18px; letter-spacing: 0.2em; text-transform: uppercase; z-index: 10; display: flex; align-items: center; gap: 14px; }
@@ -130,24 +130,28 @@
   .s9 .c { position: absolute; left: var(--pad); right: var(--pad); top: 300px; text-align: center; }
   .s9 h2 { font-size: 132px; margin-top: 36px; text-transform: uppercase; letter-spacing: 0.01em; line-height: 0.95; }
   .s9 .cta { display: inline-flex; align-items: center; gap: 22px; margin-top: 70px; padding: 26px 46px; border: 1px solid rgba(240,235,226,0.5); font-size: 22px; letter-spacing: 0.2em; text-transform: uppercase; }
-  .s9 .foot { position: absolute; left: var(--pad); right: var(--pad); bottom: 120px; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; font-size: 21px; line-height: 1.55; color: var(--mute-d); }
-  .s9 .foot b { display: block; font-weight: 400; font-size: 16px; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 10px; color: var(--fg); }
-  .s9 .foot div:last-child { text-align: right; }
+  .s9 .c { top: 230px; }
+  .s9 .foot { position: absolute; left: var(--pad); right: var(--pad); bottom: 104px; border-top: 1px solid rgba(240,235,226,0.14); padding-top: 44px; }
+  .s9 .cols { display: grid; grid-template-columns: 1fr 1.3fr; gap: 48px; font-size: 22px; line-height: 1.6; color: var(--fg); }
+  .s9 .cols p { color: var(--mute-d); }
+  .s9 .cols b { display: block; font-weight: 400; font-size: 16px; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 12px; color: var(--mute-d); }
+  .s9 .bottom { display: flex; justify-content: space-between; align-items: end; margin-top: 56px; font-size: 16px; color: var(--mute-d); }
+  .s9 .signature { font-family: var(--serif); font-style: italic; font-size: 52px; line-height: 1; color: var(--fg); }
 </style>
 </head>
 <body>
 
 <!-- 1 — Cover -->
 <section class="slide s1" id="s1">
-  <div class="top"><span class="mark">HADEEL</span><span class="idx">01 / 09</span></div>
-  <div class="tile" style="left:348px; top:170px; width:384px; height:512px"><span>01</span><img src="../../public/art/the-hat.webp" alt="" /></div>
-  <div class="tile" style="left:84px; top:330px; width:210px; height:237px"><span>02</span><img src="../../public/art/anatomy-of-us.webp" alt="" /></div>
-  <div class="tile" style="left:800px; top:250px; width:196px; height:244px"><span>03</span><img src="../../public/art/veins.webp" alt="" /></div>
-  <div class="tile" style="left:130px; top:800px; width:250px; height:250px"><span>04</span><img src="../../public/art/cockatoo.webp" alt="" /></div>
-  <div class="tile" style="left:716px; top:760px; width:230px; height:286px"><span>05</span><img src="../../public/art/earring.webp" alt="" /></div>
-  <h1 class="title display">HADEEL</h1>
+  <div class="top"><span class="mark">LILLY’S BOUTIQUE</span><span class="idx">01 / 09</span></div>
+  <div class="tile" style="left:400px; top:150px; width:280px; height:373px"><span>01</span><img src="../../public/art/the-hat.webp" alt="" /></div>
+  <div class="tile" style="left:96px; top:260px; width:200px; height:226px"><span>02</span><img src="../../public/art/anatomy-of-us.webp" alt="" /></div>
+  <div class="tile" style="left:790px; top:210px; width:190px; height:237px"><span>03</span><img src="../../public/art/veins.webp" alt="" /></div>
+  <div class="tile" style="left:130px; top:900px; width:170px; height:170px"><span>04</span><img src="../../public/art/cockatoo.webp" alt="" /></div>
+  <div class="tile" style="left:790px; top:880px; width:160px; height:199px"><span>05</span><img src="../../public/art/earring.webp" alt="" /></div>
+  <h1 class="title display">LILLY’S<br />BOUTIQUE</h1>
   <div class="sub">
-    <span class="eyebrow">Original works · 2024 — 2026</span>
+    <span class="eyebrow">Original works by Hadeel · 2024 — 2026</span>
     <p class="lede">A living gallery, now online.</p>
   </div>
   <span class="swipe">Swipe</span>
@@ -156,7 +160,7 @@
 
 <!-- 2 — Exists once -->
 <section class="slide paper s2" id="s2">
-  <div class="top"><span class="mark">HADEEL</span><span class="idx">02 / 09</span></div>
+  <div class="top"><span class="mark">LILLY’S BOUTIQUE</span><span class="idx">02 / 09</span></div>
   <h2 class="display">Every canvas<br />exists <em>once.</em></h2>
   <p class="body">Hadeel paints from a small studio with a north-facing window. This is not a store first. It is a room you walk through, and some of what hangs in it can go home with you.</p>
   <div class="row">
@@ -169,20 +173,20 @@
 
 <!-- 3 — The site -->
 <section class="slide s3" id="s3">
-  <div class="top"><span class="mark">HADEEL</span><span class="idx">03 / 09</span></div>
+  <div class="top"><span class="mark">LILLY’S BOUTIQUE</span><span class="idx">03 / 09</span></div>
   <div class="head">
     <span class="eyebrow">The website</span>
     <h2 class="display">Walk through it<br />like a gallery.</h2>
     <p class="body">Scroll, and canvases drift in from the edges, float over the title, then clear to a quiet room. On desktop and on your phone.</p>
   </div>
-  <div class="browser"><div class="bar"><i></i><i></i><i></i><u>hadeel.art</u></div><div class="shot"><img src="shots/desk-home-tiles.png" alt="" /></div></div>
+  <div class="browser"><div class="bar"><i></i><i></i><i></i><u></u></div><div class="shot"><img src="shots/desk-home-tiles.png" alt="" /></div></div>
   <div class="phone"><div class="shot"><img src="shots/mob-home.png" alt="" /></div></div>
   <div class="prog"><i style="width:33.33%"></i></div>
 </section>
 
 <!-- 4 — Featured -->
 <section class="slide s4" id="s4">
-  <div class="top"><span class="mark">HADEEL</span><span class="idx">04 / 09</span></div>
+  <div class="top"><span class="mark">LILLY’S BOUTIQUE</span><span class="idx">04 / 09</span></div>
   <div class="hero"><img src="../../public/art/the-hat-room.webp" alt="" /></div>
   <div class="cap">
     <span class="eyebrow">01 / Featured work</span>
@@ -195,12 +199,12 @@
 
 <!-- 5 — Shop -->
 <section class="slide paper s5" id="s5">
-  <div class="top"><span class="mark">HADEEL</span><span class="idx">05 / 09</span></div>
+  <div class="top"><span class="mark">LILLY’S BOUTIQUE</span><span class="idx">05 / 09</span></div>
   <div class="head">
     <span class="eyebrow">The shop</span>
     <h2 class="display">See it on a wall<br />before it’s on yours.</h2>
   </div>
-  <div class="browser"><div class="bar"><i></i><i></i><i></i><u>hadeel.art/shop</u></div><div class="shot"><img src="shots/desk-shop-top.png" alt="" /></div></div>
+  <div class="browser"><div class="bar"><i></i><i></i><i></i><u></u></div><div class="shot"><img src="shots/desk-shop-top.png" alt="" /></div></div>
   <ul>
     <li><b>In the room</b>Every piece shown framed, in real light.</li>
     <li><b>Filter &amp; sort</b>By size, price, or what’s still available.</li>
@@ -211,7 +215,7 @@
 
 <!-- 6 — Studio -->
 <section class="slide s6" id="s6">
-  <div class="top"><span class="mark">HADEEL</span><span class="idx">06 / 09</span></div>
+  <div class="top"><span class="mark">LILLY’S BOUTIQUE</span><span class="idx">06 / 09</span></div>
   <div class="head">
     <span class="eyebrow">Inside the studio</span>
     <h2 class="display">Behind<br />the canvas</h2>
@@ -228,7 +232,7 @@
 
 <!-- 7 — Statement -->
 <section class="slide paper s7" id="s7">
-  <div class="top"><span class="mark">HADEEL</span><span class="idx" style="color:#f3eee6;text-shadow:0 1px 8px rgba(0,0,0,.4)">07 / 09</span></div>
+  <div class="top"><span class="mark">LILLY’S BOUTIQUE</span><span class="idx" style="color:#f3eee6;text-shadow:0 1px 8px rgba(0,0,0,.4)">07 / 09</span></div>
   <div class="img"><img src="../../public/art/the-artist.png" alt="" /></div>
   <div class="text">
     <span class="eyebrow">Artist statement</span>
@@ -241,7 +245,7 @@
 
 <!-- 8 — Available -->
 <section class="slide s8" id="s8">
-  <div class="top"><span class="mark">HADEEL</span><span class="idx">08 / 09</span></div>
+  <div class="top"><span class="mark">LILLY’S BOUTIQUE</span><span class="idx">08 / 09</span></div>
   <div class="head">
     <div><span class="eyebrow">Available works</span><h2 class="display">Ready to leave<br />the studio</h2></div>
     <div class="count">8 available<br />2 sold</div>
@@ -259,7 +263,7 @@
 
 <!-- 9 — CTA -->
 <section class="slide s9" id="s9">
-  <div class="top"><span class="mark">HADEEL</span><span class="idx">09 / 09</span></div>
+  <div class="top"><span class="mark">LILLY’S BOUTIQUE</span><span class="idx">09 / 09</span></div>
   <div class="bgart"><img src="../../public/art/the-hat.webp" alt="" /></div>
   <div class="c">
     <span class="eyebrow">Find a piece</span>
@@ -267,8 +271,11 @@
     <span class="cta">Link in bio &nbsp;→</span>
   </div>
   <div class="foot">
-    <div><b>Shipping</b>Worldwide. Every work is packed by hand and insured in transit.</div>
-    <div><b>Studio</b>studio@hadeel.art</div>
+    <div class="cols">
+      <div><b>Studio</b>studio@hadeel.art<br />Instagram @had.eel_art</div>
+      <div><b>Shipping</b><p>Worldwide. Every work is packed by hand and insured in transit.</p></div>
+    </div>
+    <div class="bottom"><span class="signature">Lilly’s Boutique</span><span>© 2026 Lilly’s Boutique. All works original.</span></div>
   </div>
   <div class="prog"><i style="width:100%"></i></div>
 </section>

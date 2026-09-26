@@ -1,6 +1,7 @@
-import { useLayoutEffect, useRef } from 'react';
+import { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { gsap } from '../../lib/gsap.js';
+import { useScene } from '../../lib/useScene.js';
 import { artworks, artUrl, artSrcSet, roomUrl, roomSrcSet, roomRatio, formatPrice } from '../../data/catalog.mjs';
 import { HANDOFF_ID } from './Studio.jsx';
 
@@ -12,27 +13,24 @@ export default function Available() {
   const rest = artworks.filter((a) => a.status === 'available' && a.id !== HANDOFF_ID).slice(0, 3);
   const list = [lead, ...rest];
 
-  useLayoutEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.from('.av-head .line', {
-        yPercent: 110, stagger: 0.1, duration: 1.2, ease: 'expo.out',
-        scrollTrigger: { trigger: '.av-head', start: 'top 85%' },
-      });
-      gsap.utils.toArray('.av-card').forEach((el) => {
-        if (!el.classList.contains('is-handoff')) {
-          gsap.from(el, { y: 80, opacity: 0, duration: 1.2, scrollTrigger: { trigger: el, start: 'top 88%' } });
-          gsap.fromTo(el.querySelector('img'), { yPercent: -6 }, {
-            yPercent: 6, ease: 'none',
-            scrollTrigger: { trigger: el, start: 'top bottom', end: 'bottom top', scrub: true },
-          });
-        } else {
-          gsap.from(el.querySelector('.av-meta'), { opacity: 0, y: 16, scrollTrigger: { trigger: el, start: 'top 30%' } });
-        }
-      });
-      gsap.from('.av-all', { opacity: 0, y: 20, scrollTrigger: { trigger: '.av-all', start: 'top 92%' } });
-    }, root);
-    return () => ctx.revert();
-  }, []);
+  useScene(root, () => {
+    gsap.from('.av-head .line', {
+      yPercent: 110, stagger: 0.1, duration: 1.2, ease: 'expo.out',
+      scrollTrigger: { trigger: '.av-head', start: 'top 85%' },
+    });
+    gsap.utils.toArray('.av-card').forEach((el) => {
+      if (!el.classList.contains('is-handoff')) {
+        gsap.from(el, { y: 80, opacity: 0, duration: 1.2, scrollTrigger: { trigger: el, start: 'top 88%' } });
+        gsap.fromTo(el.querySelector('img'), { yPercent: -6 }, {
+          yPercent: 6, ease: 'none',
+          scrollTrigger: { trigger: el, start: 'top bottom', end: 'bottom top', scrub: true },
+        });
+      } else {
+        gsap.from(el.querySelector('.av-meta'), { opacity: 0, y: 16, scrollTrigger: { trigger: el, start: 'top 30%' } });
+      }
+    });
+    gsap.from('.av-all', { opacity: 0, y: 20, scrollTrigger: { trigger: '.av-all', start: 'top 92%' } });
+  }, { waitForInput: true });
 
   return (
     <section ref={root} className="av">

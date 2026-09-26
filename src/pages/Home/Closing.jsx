@@ -1,21 +1,19 @@
-import { useLayoutEffect, useRef } from 'react';
+import { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { gsap } from '../../lib/gsap.js';
+import { useScene } from '../../lib/useScene.js';
 import Footer from '../../components/Footer.jsx';
 
 export default function Closing() {
   const root = useRef(null);
 
-  useLayoutEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.from('.cl-title .line', {
-        yPercent: 110, stagger: 0.12, duration: 1.5, ease: 'expo.out',
-        scrollTrigger: { trigger: '.cl-title', start: 'top 80%' },
-      });
-      gsap.from('.cl-cta', { opacity: 0, y: 20, delay: 0.4, scrollTrigger: { trigger: '.cl-title', start: 'top 80%' } });
-    }, root);
-    return () => ctx.revert();
-  }, []);
+  useScene(root, () => {
+    gsap.from('.cl-title .line', {
+      yPercent: 110, stagger: 0.12, duration: 1.5, ease: 'expo.out',
+      scrollTrigger: { trigger: '.cl-title', start: 'top 80%' },
+    });
+    gsap.from('.cl-cta', { opacity: 0, y: 20, delay: 0.4, scrollTrigger: { trigger: '.cl-title', start: 'top 80%' } });
+  }, { waitForInput: true });
 
   return (
     <section ref={root} className="cl">

@@ -2,6 +2,7 @@ import { useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { gsap } from '../lib/gsap.js';
 import { artworks, roomUrl, roomSrcSet, roomRatio, formatPrice } from '../data/catalog.mjs';
+import { track } from '../lib/analytics.js';
 import ArtworkDetail from '../components/ArtworkDetail.jsx';
 import Footer from '../components/Footer.jsx';
 
@@ -54,7 +55,11 @@ export default function Shop() {
     return () => ctx.revert();
   }, [list]);
 
-  const openArt = (id) => setParams(id ? { art: id } : {});
+  const openArt = (id) => {
+    const a = id && artworks.find((x) => x.id === id);
+    if (a) track('Artwork viewed', { artwork: a.title, status: a.status });
+    setParams(id ? { art: id } : {});
+  };
 
   return (
     <main ref={root} className="shop">

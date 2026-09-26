@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import { artworks } from '../data/catalog.mjs';
+import { track } from './analytics.js';
 
 const CartContext = createContext(null);
 const KEY = 'hadeel.cart';
@@ -44,11 +45,20 @@ export function CartProvider({ children }) {
       items,
       subtotal,
       has: (id) => ids.includes(id),
-      add: (id) => setIds((prev) => (prev.includes(id) ? prev : [...prev, id])),
-      remove: (id) => setIds((prev) => prev.filter((x) => x !== id)),
+      add: (id) => {
+        const a = artworks.find((x) => x.id === id);
+        if (a && !ids.includes(id)) track('Add to cart', { artwork: a.title, price: a.price });
+        setIds((prev) => (prev.includes(id) ? prev : [...prev, id]));
+      },
+      remove: (id) => {
+        const a = artworks.find((x) => x.id === id);
+        if (a) track('Remove from cart', { artwork: a.title });
+        setIds((prev) => prev.filter((x) => x !== id));
+      },
       clear: () => setIds([]),
       lastOrder,
       placeOrder: (order) => {
+        track('Order placed', { items: order.items.length, total: order.total, payment: order.payment?.label ?? null });
         setLastOrder(order);
         setIds([]);
       },

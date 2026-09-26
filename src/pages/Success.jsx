@@ -75,7 +75,7 @@ export default function Success() {
           <span className="line-mask"><span className="line">From my studio</span></span>
           <span className="line-mask"><span className="line">to your space.</span></span>
         </h2>
-        <span className="signature">Lilly Boutique</span>
+        <span className="signature">Lilly's Boutique</span>
         <Link to="/" className="link-arrow big">Back to the gallery</Link>
       </section>
     </main>

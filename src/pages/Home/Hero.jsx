@@ -128,7 +128,7 @@ export default function Hero() {
     <section ref={root} className="hero">
       <div className="hero-stage">
         <div className="hero-titleblock">
-          <h1 className="hero-title"><SplitChars text="LILLY BOUTIQUE" /></h1>
+          <h1 className="hero-title"><SplitChars text="LILLY'S BOUTIQUE" /></h1>
           <div className="hero-meta">
             <span>Original works</span>
             <span>2024 — 2026</span>

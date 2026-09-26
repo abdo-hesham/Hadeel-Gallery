@@ -8,8 +8,8 @@ export default function Legal({ eyebrow, title, updated, intro, sections }) {
   const root = useRef(null);
 
   useEffect(() => {
-    document.title = `${title} — Lilly Boutique`;
-    return () => { document.title = 'Lilly Boutique — Original Works'; };
+    document.title = `${title} — Lilly's Boutique`;
+    return () => { document.title = "Lilly's Boutique — Original Works"; };
   }, [title]);
 
   useLayoutEffect(() => {

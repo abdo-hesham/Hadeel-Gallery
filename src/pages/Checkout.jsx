@@ -61,7 +61,7 @@ export default function Checkout() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify({
-          _subject: `New Lilly Boutique order #${order.number}`,
+          _subject: `New Lilly's Boutique order #${order.number}`,
           _template: 'table',
           _captcha: 'false',
           _replyto: order.email,

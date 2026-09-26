@@ -2,7 +2,7 @@ import Legal from './Legal.jsx';
 
 const SECTIONS = [
   { h: '1. Who we are', p: [
-    'Lilly Boutique is the online studio shop of the painter Hadeel. Every work sold here is an original, one-of-one piece made by hand. By placing an order you agree to these terms.',
+    "Lilly's Boutique is the online studio shop of the painter Hadeel. Every work sold here is an original, one-of-one piece made by hand. By placing an order you agree to these terms.",
   ] },
   { h: '2. Originals, not prints', p: [
     'Each listing is a single physical artwork. Once it is sold it is gone; we do not produce copies, editions or reproductions unless a listing says so explicitly.',
@@ -27,7 +27,7 @@ const SECTIONS = [
   ] },
   { h: '7. Copyright', p: [
     'Buying an artwork transfers ownership of the physical object only. Copyright in the image stays with the artist. You may photograph and display the work privately, but you may not reproduce, print, license or sell images of it without written permission.',
-    'All text, photographs and code on this site are the property of Lilly Boutique and may not be reused without permission.',
+    "All text, photographs and code on this site are the property of Lilly's Boutique and may not be reused without permission.",
   ] },
   { h: '8. Liability', p: [
     'Our liability for any order is limited to the price paid for that order. Nothing in these terms limits liability that cannot be limited under applicable law.',

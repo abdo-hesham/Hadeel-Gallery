@@ -27,7 +27,7 @@ export default function Nav() {
 
   return (
     <header className={`nav ${inCheckout ? 'nav-solid' : ''} ${scrolled ? 'is-scrolled' : ''}`}>
-      <Link to="/" className="nav-brand">LILLY BOUTIQUE</Link>
+      <Link to="/" className="nav-brand">LILLY'S BOUTIQUE</Link>
       {!inCheckout && (
         <nav className="nav-links">
           <NavLink to="/">Gallery</NavLink>

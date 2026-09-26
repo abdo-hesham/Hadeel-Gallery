@@ -39,7 +39,7 @@ export default function PageTransition({ children }) {
   return (
     <>
       <div key={shown.key} className="page">{shown.node}</div>
-      <div ref={curtain} className="curtain"><span>LILLY BOUTIQUE</span></div>
+      <div ref={curtain} className="curtain"><span>LILLY'S BOUTIQUE</span></div>
     </>
   );
 }

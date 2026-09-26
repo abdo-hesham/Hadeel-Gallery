@@ -10,8 +10,8 @@ export default function NotFound() {
   const a = artworks.find((x) => x.id === 'earring');
 
   useEffect(() => {
-    document.title = 'Page not found — Lilly Boutique';
-    return () => { document.title = 'Lilly Boutique — Original Works'; };
+    document.title = "Page not found — Lilly's Boutique";
+    return () => { document.title = "Lilly's Boutique — Original Works"; };
   }, []);
 
   useLayoutEffect(() => {

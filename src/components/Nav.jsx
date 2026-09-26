@@ -9,6 +9,9 @@ export default function Nav() {
   const location = useLocation();
   const inCheckout = location.pathname === '/checkout' || location.pathname === '/success' || location.pathname === '/confirmation';
 
+  // Home keeps the transparent, blend-mode nav over the dark hero. Every other
+  // page gets a nav filled with the page background so content never shows through.
+  const solid = location.pathname !== '/';
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -16,17 +19,16 @@ export default function Nav() {
     gsap.fromTo(badge.current, { scale: 1.6 }, { scale: 1, duration: 0.6, ease: 'elastic.out(1, 0.5)' });
   }, [items.length]);
 
-  // Checkout pages get a solid nav once the page scrolls, so form text never runs under it.
   useEffect(() => {
-    if (!inCheckout) { setScrolled(false); return; }
+    if (!solid) { setScrolled(false); return; }
     const onScroll = () => setScrolled(window.scrollY > 24);
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
-  }, [inCheckout]);
+  }, [solid]);
 
   return (
-    <header className={`nav ${inCheckout ? 'nav-solid' : ''} ${scrolled ? 'is-scrolled' : ''}`}>
+    <header className={`nav ${solid ? 'nav-solid' : ''} ${scrolled ? 'is-scrolled' : ''}`}>
       <Link to="/" className="nav-brand">LILLY'S BOUTIQUE</Link>
       {!inCheckout && (
         <nav className="nav-links">

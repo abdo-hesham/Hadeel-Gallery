@@ -1,6 +1,6 @@
 {
   "rewrites": [
-    { "source": "/((?!art/|assets/|fonts/|favicon.svg|icons.svg|robots.txt|sitemap.xml|_vercel/).*)", "destination": "/index.html" }
+    { "source": "/((?!art/|assets/|fonts/|favicon.svg|icons.svg|robots.txt|sitemap.xml|llms.txt|.well-known/|_vercel/).*)", "destination": "/index.html" }
   ],
   "headers": [
     {

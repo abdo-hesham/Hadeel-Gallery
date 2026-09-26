@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import { gsap, ScrollTrigger } from '../../lib/gsap.js';
 import { useScene } from '../../lib/useScene.js';
-import { artworks, artUrl } from '../../data/catalog.mjs';
+import { artworks, artUrl, artSrcSet } from '../../data/catalog.mjs';
 
 // Section 03. One painting (Half Wing) is built in front of the viewer while the
 // section is pinned: a detail fragment, then sketch, palette and texture arrive
@@ -189,7 +189,9 @@ export default function Studio() {
         <div className="sd-paint-move">
           <div className="sd-paint-frame" aria-hidden="true"><i /><i /><i /><i /></div>
           <figure className="sd-painting">
-            <img src={artUrl(a.id)} alt={a.alt || a.title} loading="lazy" decoding="async" />
+            {/* sizes covers the largest this gets on screen: scaled 1.82x at the start, then
+                handed off to the full-width Available card on mobile. */}
+            <img src={artUrl(a.id)} srcSet={artSrcSet(a.id)} sizes="(max-width: 900px) 100vw, 75vw" alt={a.alt || a.title} loading="lazy" decoding="async" />
           </figure>
           <span className="sd-frag-label eyebrow">Detail — in progress</span>
           <figcaption className="sd-caption">

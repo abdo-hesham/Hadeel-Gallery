@@ -1,0 +1,21 @@
+# Lilly's Boutique
+
+> Online gallery and shop for original paintings by the artist Hadeel, 2024 to 2026. Every work is one of a kind; nothing is a print.
+
+## Pages
+
+- [Gallery](https://lillyboutique.com/): the home page, a scroll-through gallery of the collection and the studio
+- [Works](https://lillyboutique.com/shop): every painting with medium, size, year and availability
+- [Terms and Conditions](https://lillyboutique.com/terms)
+- [Privacy Policy](https://lillyboutique.com/privacy)
+
+## Available works
+
+- [The Hat](https://lillyboutique.com/shop?art=the-hat): Acrylic on canvas, 90 × 120 cm, 2026
+- [Anatomy of Us](https://lillyboutique.com/shop?art=anatomy-of-us): Acrylic on canvas, 62 × 70 cm, 2026
+- [Veins](https://lillyboutique.com/shop?art=veins): Acrylic on canvas, 80 × 100 cm, 2026
+- [Earring](https://lillyboutique.com/shop?art=earring): Oil on canvas, 56 × 70 cm, 2025
+- [Night on a Case](https://lillyboutique.com/shop?art=night-on-a-case): Acrylic on phone case, 8 × 12 cm, 2025
+- [Turban](https://lillyboutique.com/shop?art=turban): Oil on canvas, 60 × 80 cm, 2026
+- [Half Wing](https://lillyboutique.com/shop?art=half-wing): Acrylic on canvas, 40 × 40 cm, 2025
+- [Cockatoo](https://lillyboutique.com/shop?art=cockatoo): Oil on canvas, 50 × 50 cm, 2025

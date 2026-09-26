@@ -30,3 +30,23 @@ ${pages.map((p) => `  <url>
 
 writeFileSync(fileURLToPath(new URL('../public/sitemap.xml', import.meta.url)), xml);
 console.log(`sitemap: ${pages.length} urls for ${SITE}`);
+
+// llms.txt (https://llmstxt.org): a short Markdown map of the site for AI agents.
+const available = artworks.filter((a) => a.status === 'available');
+const llms = `# Lilly's Boutique
+
+> Online gallery and shop for original paintings by the artist Hadeel, 2024 to 2026. Every work is one of a kind; nothing is a print.
+
+## Pages
+
+- [Gallery](${SITE}/): the home page, a scroll-through gallery of the collection and the studio
+- [Works](${SITE}/shop): every painting with medium, size, year and availability
+- [Terms and Conditions](${SITE}/terms)
+- [Privacy Policy](${SITE}/privacy)
+
+## Available works
+
+${available.map((a) => `- [${a.title}](${SITE}/shop?art=${a.id}): ${a.medium}, ${a.width} × ${a.height} cm, ${a.year}`).join('\n')}
+`;
+writeFileSync(fileURLToPath(new URL('../public/llms.txt', import.meta.url)), llms);
+console.log(`llms.txt: ${available.length} available works`);

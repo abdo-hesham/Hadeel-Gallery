@@ -42,7 +42,7 @@ export default function Statement() {
       <figure className="st-img">
         <img
           src="/art/the-artist.webp"
-          srcSet="/art/the-artist-480.webp 480w, /art/the-artist-960.webp 960w, /art/the-artist.webp 1200w"
+          srcSet="/art/the-artist-240.webp 240w, /art/the-artist-480.webp 480w, /art/the-artist-640.webp 640w, /art/the-artist-960.webp 960w, /art/the-artist.webp 1200w"
           sizes="(max-width: 900px) 100vw, 50vw"
           alt="Hadeel, the artist"
           loading="lazy"

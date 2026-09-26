@@ -26,9 +26,10 @@ export const studioShots = [
 
 export const artUrl = (id) => `/art/${id}.webp`;
 
-// Responsive variants from scripts/resize-art.mjs (<name>-480.webp, <name>-960.webp).
+// Responsive variants from scripts/resize-art.mjs (<name>-<w>.webp for 240/480/640/960).
 // Originals are ~1100-1250px wide; 1200w is close enough for the browser's pick.
-const srcSetFor = (name) => `/art/${name}-480.webp 480w, /art/${name}-960.webp 960w, /art/${name}.webp 1200w`;
+const VARIANTS = [240, 480, 640, 960];
+const srcSetFor = (name) => [...VARIANTS.map((w) => `/art/${name}-${w}.webp ${w}w`), `/art/${name}.webp 1200w`].join(', ');
 export const artSrcSet = (id) => srcSetFor(id);
 
 // In-situ mockup (framed on a wall) for shop listings. Falls back to the flat image.

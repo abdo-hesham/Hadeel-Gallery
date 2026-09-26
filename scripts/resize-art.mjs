@@ -1,12 +1,12 @@
 // Generates responsive variants of the artwork images so pages never ship the
 // full-size originals into small slots. Writes public/art/<name>-<width>.webp
-// for every width in WIDTHS (skipped when the source is narrower).
+// for every width in WIDTHS (skipped when the source is narrower or the file exists).
 // Usage: node scripts/resize-art.mjs
 import sharp from 'sharp';
 import { existsSync } from 'node:fs';
 import { artworks } from '../src/data/catalog.mjs';
 
-export const WIDTHS = [480, 960];
+export const WIDTHS = [240, 480, 640, 960];
 const DIR = 'public/art';
 
 const names = [
@@ -24,7 +24,7 @@ for (const name of names) {
   const src = `${DIR}/${name}.webp`;
   const { width } = await sharp(src).metadata();
   for (const w of WIDTHS) {
-    if (w >= width) continue;
+    if (w >= width || existsSync(`${DIR}/${name}-${w}.webp`)) continue;
     await sharp(src).resize({ width: w }).webp({ quality: 74, effort: 6 }).toFile(`${DIR}/${name}-${w}.webp`);
   }
   console.log(name);
